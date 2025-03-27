@@ -7,6 +7,7 @@ import (
 	"net/http"
 
 	base "github.com/yumo001/simple-learn-api/internal/handler/base"
+	xaddress "github.com/yumo001/simple-learn-api/internal/handler/xaddress"
 	"github.com/yumo001/simple-learn-api/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
@@ -21,5 +22,39 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: base.InitDatabaseHandler(serverCtx),
 			},
 		},
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.Authority},
+			[]rest.Route{
+				{
+					Method:  http.MethodPost,
+					Path:    "/x_address/create",
+					Handler: xaddress.CreateXAddressHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/x_address/update",
+					Handler: xaddress.UpdateXAddressHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/x_address/delete",
+					Handler: xaddress.DeleteXAddressHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/x_address/list",
+					Handler: xaddress.GetXAddressListHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/x_address",
+					Handler: xaddress.GetXAddressByIdHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 	)
 }

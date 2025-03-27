@@ -1,0 +1,131 @@
+import "../base.api"
+
+type (
+    // The response data of x address information | XAddress信息
+    XAddressInfo {
+        BaseIDInfo
+
+        // UserId
+        UserId  *int64 `json:"userId,optional"`
+
+        // Default
+        Default  *int64 `json:"default,optional"`
+
+        // FirstName
+        FirstName  *string `json:"firstName,optional"`
+
+        // LastName
+        LastName  *string `json:"lastName,optional"`
+
+        // CountryId
+        CountryId  *int64 `json:"countryId,optional"`
+
+        // Street
+        Street  *string `json:"street,optional"`
+
+        // Province
+        Province  *string `json:"province,optional"`
+
+        // City
+        City  *string `json:"city,optional"`
+
+        // PostalCode
+        PostalCode  *string `json:"postalCode,optional"`
+
+        // Phone
+        Phone  *string `json:"phone,optional"`
+    }
+
+    // The response data of x address list | XAddress信息列表数据
+    XAddressListResp {
+        BaseDataInfo
+
+        // XAddress list data | XAddress信息列表数据
+        Data XAddressListInfo `json:"data"`
+    }
+
+    // The x address list data | XAddress信息列表数据
+    XAddressListInfo {
+        BaseListInfo
+
+        // The x address list data | XAddress信息列表数据
+        Data  []XAddressInfo  `json:"data"`
+    }
+
+    // Get x address list request params | XAddress列表请求参数
+    XAddressListReq {
+        PageInfo
+
+        // CreatedAt
+        CreatedAt  *int64 `json:"createdAt,optional"`
+
+        // UpdatedAt
+        UpdatedAt  *int64 `json:"updatedAt,optional"`
+
+        // UserId
+        UserId  *int64 `json:"userId,optional"`
+
+        // Default
+        Default  *int64 `json:"default,optional"`
+
+        // FirstName
+        FirstName  *string `json:"firstName,optional"`
+
+        // LastName
+        LastName  *string `json:"lastName,optional"`
+
+        // CountryId
+        CountryId  *int64 `json:"countryId,optional"`
+
+        // Street
+        Street  *string `json:"street,optional"`
+
+        // Province
+        Province  *string `json:"province,optional"`
+
+        // City
+        City  *string `json:"city,optional"`
+
+        // PostalCode
+        PostalCode  *string `json:"postalCode,optional"`
+
+        // Phone
+        Phone  *string `json:"phone,optional"`
+    }
+
+    // The x address information response | XAddress信息返回体
+    XAddressInfoResp {
+        BaseDataInfo
+
+        // The x address information | XAddress信息数据
+        Data XAddressInfo `json:"data"`
+    }
+)
+
+@server(
+    jwt: Auth
+    group: xaddress
+    middleware: Authority
+)
+
+service Example {
+    // Create x address information | 创建XAddress信息
+    @handler createXAddress
+    post /x_address/create (XAddressInfo) returns (BaseMsgResp)
+
+    // Update x address information | 更新XAddress信息
+    @handler updateXAddress
+    post /x_address/update (XAddressInfo) returns (BaseMsgResp)
+
+    // Delete x address information | 删除XAddress信息
+    @handler deleteXAddress
+    post /x_address/delete (IDsReq) returns (BaseMsgResp)
+
+    // Get x address list | 获取XAddress信息列表
+    @handler getXAddressList
+    post /x_address/list (XAddressListReq) returns (XAddressListResp)
+
+    // Get x address by ID | 通过ID获取XAddress信息
+    @handler getXAddressById
+    post /x_address (IDReq) returns (XAddressInfoResp)
+}

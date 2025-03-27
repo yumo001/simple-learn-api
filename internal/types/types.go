@@ -254,3 +254,83 @@ type BaseIDStringInfo struct {
 	// Update date | 更新日期
 	UpdatedAt *int64 `json:"updatedAt,optional"`
 }
+
+// The response data of x address information | XAddress信息
+// swagger:model XAddressInfo
+type XAddressInfo struct {
+	BaseIDInfo
+	// UserId
+	UserId *int64 `json:"userId,optional"`
+	// Default
+	Default *int64 `json:"default,optional"`
+	// FirstName
+	FirstName *string `json:"firstName,optional"`
+	// LastName
+	LastName *string `json:"lastName,optional"`
+	// CountryId
+	CountryId *int64 `json:"countryId,optional"`
+	// Street
+	Street *string `json:"street,optional"`
+	// Province
+	Province *string `json:"province,optional"`
+	// City
+	City *string `json:"city,optional"`
+	// PostalCode
+	PostalCode *string `json:"postalCode,optional"`
+	// Phone
+	Phone *string `json:"phone,optional"`
+}
+
+// The response data of x address list | XAddress信息列表数据
+// swagger:model XAddressListResp
+type XAddressListResp struct {
+	BaseDataInfo
+	// XAddress list data | XAddress信息列表数据
+	Data XAddressListInfo `json:"data"`
+}
+
+// The x address list data | XAddress信息列表数据
+// swagger:model XAddressListInfo
+type XAddressListInfo struct {
+	BaseListInfo
+	// The x address list data | XAddress信息列表数据
+	Data []XAddressInfo `json:"data"`
+}
+
+// Get x address list request params | XAddress列表请求参数
+// swagger:model XAddressListReq
+type XAddressListReq struct {
+	PageInfo
+	// CreatedAt
+	CreatedAt *int64 `json:"createdAt,optional"`
+	// UpdatedAt
+	UpdatedAt *int64 `json:"updatedAt,optional"`
+	// UserId
+	UserId *int64 `json:"userId,optional"`
+	// Default
+	Default *int64 `json:"default,optional"`
+	// FirstName
+	FirstName *string `json:"firstName,optional"`
+	// LastName
+	LastName *string `json:"lastName,optional"`
+	// CountryId
+	CountryId *int64 `json:"countryId,optional"`
+	// Street
+	Street *string `json:"street,optional"`
+	// Province
+	Province *string `json:"province,optional"`
+	// City
+	City *string `json:"city,optional"`
+	// PostalCode
+	PostalCode *string `json:"postalCode,optional"`
+	// Phone
+	Phone *string `json:"phone,optional"`
+}
+
+// The x address information response | XAddress信息返回体
+// swagger:model XAddressInfoResp
+type XAddressInfoResp struct {
+	BaseDataInfo
+	// The x address information | XAddress信息数据
+	Data XAddressInfo `json:"data"`
+}

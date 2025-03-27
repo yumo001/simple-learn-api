@@ -4,7 +4,7 @@ Port: 8082
 Timeout: 2000
 
 Auth:
-  AccessSecret: # the same as core
+  AccessSecret: "bX92YXRqNXpMcDF2MTIzNDU2Nzg5MDEy" # the same as core
   AccessExpire: 259200
 
 CROSConf:
@@ -12,7 +12,8 @@ CROSConf:
 
 Log:
   ServiceName: ExampleApiLogger
-  Mode: file
+#  Mode: file
+  Mode: console
   Path: /home/data/logs/Example/api
   Level: info
   Compress: false
@@ -59,10 +60,13 @@ I18nConf:
 
 
 ExampleRpc:
+#  EntPoints:
+#    - 127.0.0.1:8081
+#  Enabled: true
   Etcd:
     Hosts:
       - 127.0.0.1:2379
     Key: example.rpc
-    DialTimeout: 5000  # 毫秒
-    Timeout: 3000
-    PermitWithoutStream: true
+  DialTimeout: 5000  # 毫秒
+  Timeout: 3000
+  PermitWithoutStream: true
